@@ -9,6 +9,10 @@ import { GatewayModule } from './gateway/gateway.module';
 import { MessageModule } from './message/message.module';
 import { TokenModule } from './token/token.module';
 import { AuthMiddleware } from './auth/auth.middleware';
+import { Chat } from './chat/chat.entity';
+import { User } from './user/user.entity';
+import { Message } from './message/message.entity';
+import { Token } from './token/token.entity';
 
 @Module({
     imports: [
@@ -22,7 +26,7 @@ import { AuthMiddleware } from './auth/auth.middleware';
             username: 'postgres',
             password: 'postgres',
             database: 'auth_db',
-            entities: [],
+            entities: [Chat, User, Message, Token],
             autoLoadEntities: true,
             synchronize: true,
         }),

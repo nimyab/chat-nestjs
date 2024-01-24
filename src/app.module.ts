@@ -14,21 +14,30 @@ import { User } from './user/user.entity';
 import { Message } from './message/message.entity';
 import { Token } from './token/token.entity';
 
+// TYPE_BD = 'postgres'
+// HOST_BD = 'localhost'
+// PORT_BD =  5432
+// USERNAME_BD = 'postgres'
+// PASSWORD_BD = 'postgres'
+// DATABASE = 'auth_db'
+// AUTOLOADENTITIES = true
+// SYNCHRONIZE = true
+
 @Module({
     imports: [
         ConfigModule.forRoot({
-            envFilePath: '.env'
+            envFilePath: '.env',
         }),
         TypeOrmModule.forRoot({
             type: 'postgres',
-            host: 'localhost',
-            port: 5432,
-            username: 'postgres',
-            password: 'postgres',
-            database: 'auth_db',
+            host: process.env.HOST_BD,
+            port: Number(process.env.PORT_BD),
+            username: process.env.USERNAME_BD,
+            password: process.env.PASSWORD_BD,
+            database: process.env.DATABASE,
             entities: [Chat, User, Message, Token],
-            autoLoadEntities: true,
-            synchronize: true,
+            autoLoadEntities: Boolean(process.env.AUTOLOADENTITIES),
+            synchronize: Boolean(process.env.SYNCHRONIZE),
         }),
         UserModule,
         AuthModule,
@@ -40,6 +49,6 @@ import { Token } from './token/token.entity';
 })
 export class AppModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {
-        consumer.apply(AuthMiddleware).forRoutes(UserController)
+        consumer.apply(AuthMiddleware).forRoutes(UserController);
     }
 }

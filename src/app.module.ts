@@ -14,15 +14,6 @@ import { User } from './user/user.entity';
 import { Message } from './message/message.entity';
 import { Token } from './token/token.entity';
 
-// TYPE_BD = 'postgres'
-// HOST_BD = 'localhost'
-// PORT_BD =  5432
-// USERNAME_BD = 'postgres'
-// PASSWORD_BD = 'postgres'
-// DATABASE = 'auth_db'
-// AUTOLOADENTITIES = true
-// SYNCHRONIZE = true
-
 @Module({
     imports: [
         ConfigModule.forRoot({
